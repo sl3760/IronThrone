@@ -53,4 +53,16 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resources :episodes
+
+  match "/renders/dashboard", to:"renders#dashboard", via: 'get'
+
+  match "/upload", to: "episodes#new",  via: 'get' 
+
+  root to: "renders#home"
+
+  match "/estimate", to: "renders#estimate", via: 'post'
+
+  match "/renders/produce", to: "renders#produce", via: 'post'
 end
