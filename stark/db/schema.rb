@@ -11,30 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626033135) do
+ActiveRecord::Schema.define(version: 20140626174130) do
 
   create_table "comments", force: true do |t|
-    t.integer  "episode_id"
-    t.text     "content"
+    t.string   "episode_id"
+    t.string   "integer"
+    t.string   "content"
+    t.string   "text"
+    t.string   "name"
+    t.string   "string"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
   end
 
   create_table "episodes", force: true do |t|
     t.string   "name"
-    t.text     "script"
+    t.string   "string"
+    t.string   "script"
+    t.string   "text"
     t.string   "image_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "statistics", force: true do |t|
-    t.integer  "good_num"
-    t.integer  "bad_num"
-    t.integer  "comment_num"
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
+    t.string   "remember_token"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end

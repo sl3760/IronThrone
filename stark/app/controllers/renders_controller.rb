@@ -33,6 +33,8 @@ class RendersController < ApplicationController
      statistic = Statistic.find(id)
      num = 0
      if es == "good"
+      puts '1111111111111111111111'
+      puts statistic.good_num.class
       statistic.good_num = statistic.good_num + 1
       num = statistic.good_num
      else
