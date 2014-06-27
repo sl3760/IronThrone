@@ -1,1 +1,5 @@
-$('#comment-field').append("<%= escape_javascript(render 'comment') %>");
+<% if signed_in? %>
+    $('#comment-field').append("<%= escape_javascript(render 'comment') %>");
+<% else %>
+    window.location.href = "/signin";
+<% end %>

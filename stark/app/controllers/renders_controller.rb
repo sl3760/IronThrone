@@ -27,24 +27,38 @@ class RendersController < ApplicationController
       end
     end
    
-   def estimate
-     id = params[:id]
-     es = params[:es]
-     statistic = Statistic.find(id)
-     num = 0
-     if es == "good"
-      statistic.good_num = statistic.good_num + 1
-      num = statistic.good_num
-     else
-      statistic.bad_num = statistic.bad_num + 1
-      num = statistic.bad_num
-     end
-     statistic.save
-     respond_to do |format|
-       res = {:num => num}
-       format.json {render :json=>res}
-     end 
+  def estimate
+    @id = params[:id]
+    @es = params[:es]
+    @flag = 0
+    @num = 0
+    if !signed_in?
+      @flag = -1
+    elsif hasMadeEstimate?(@id.to_i, current_user.id)
+      @flag = 1
+    else
+      statistic = Statistic.find(@id.to_i)
+      if @es == "good"
+        statistic.good_num = statistic.good_num + 1
+        @num = statistic.good_num
+      else
+        statistic.bad_num = statistic.bad_num + 1
+        @num = statistic.bad_num
+      end
+      statistic.save
+      Estimate.new(:episode_id=>@id.to_i, :user_id=>current_user.id).save
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
+
+  #respond_to do |format|
+  #  res = {:num => num}
+  #  format.json {render :json=>res}
+  #end 
+
 
   def dashboard
     @episode_id = params[:episode_id]
@@ -62,9 +76,10 @@ class RendersController < ApplicationController
   end
 
   def produce
+    if signed_in?
     episode_id = params[:episode_id]
     content = params[:comment][:content]
-    name = params[:comment][:name]
+    name = current_user.name
     @comment = Comment.new({:episode_id=>episode_id, :name=>name ,:content=>content})
     tmp1 = @comment.save
     @stat = Statistic.find(episode_id)
@@ -80,5 +95,12 @@ class RendersController < ApplicationController
         format.js
       end
     end
+    else
+     respond_to do |format|
+      format.html {render :action=>"dashboard"}
+      format.js
+     end
+    end
   end
+
 end

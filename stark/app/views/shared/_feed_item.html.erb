@@ -24,12 +24,14 @@
    
             <div class="media-body">
                 <div style="float:left;padding-right:25px;padding-left:30px">
-                    <img src="/good.png" onClick="estimate(<%=feed_item.id %>, 'good')">
+<%= link_to (image_tag "/good.png"), url_for({:controller=>"renders", :action=>"estimate", :es=>"good", :id=>feed_item.id}), remote:true %>
+                    <!--<img src="/good.png" onClick="estimate(<%=feed_item.id %>, 'good')">-->
                     <p style="padding-left:24px" id="<%= feed_item.id %>-good"><%= feed_item.good_num %></p>
                 </div>
             
                 <div style="float:left;padding-top:2px;padding-right:27px">
-                    <img src="/bad.png" onClick="estimate(<%=feed_item.id %>, 'bad')">
+<%= link_to (image_tag "/bad.png"), url_for({:controller=>"renders", :action=>"estimate", :es=>"bad", :id=>feed_item.id}), remote:true %>
+                    <!--<img src="/bad.png" onClick="estimate(<%=feed_item.id %>, 'bad')">-->
                     <p style="padding-left:24px" id="<%= feed_item.id %>-bad"><%= feed_item.bad_num %></p>
                 </div>
                 

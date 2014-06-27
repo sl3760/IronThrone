@@ -1,0 +1,8 @@
+<% if @flag == -1 %>
+    window.location.href = "/signin";
+<% elsif @flag == 1 %>
+    alert("You have made estimate before");
+<% else %>
+    var es_id_selector = '#' + "<%=escape_javascript(@id) %>" + '-' + "<%=escape_javascript(@es) %>";
+    $(es_id_selector).html("<%= escape_javascript(@num.to_s) %>");
+<% end %>

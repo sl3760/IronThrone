@@ -56,13 +56,27 @@ Rails.application.routes.draw do
 
   resources :episodes
 
+  resources :users
+
+  resources :sessions, only: [:new, :create, :destroy]
+
   match "/renders/dashboard", to:"renders#dashboard", via: 'get'
 
   match "/upload", to: "episodes#new",  via: 'get' 
 
   root to: "renders#home"
 
-  match "/estimate", to: "renders#estimate", via: 'post'
+  match "/renders/estimate", to: "renders#estimate", via: 'get'
 
   match "/renders/produce", to: "renders#produce", via: 'post'
+
+  match '/signup', to: 'users#new', via:'get'
+
+  match '/signin', to: 'sessions#new', via:'get'
+
+  match '/signout', to: 'sessions#destroy', via: 'delete'
+
+  match '/about', to: 'renders#about', via: 'get'
+
+  match '/contact', to: 'renders#contact', via: 'get'
 end

@@ -5,12 +5,15 @@ class EpisodesController < ApplicationController
     end
  
     def new
+      if !signed_in?
+        redirect_to signin_path
+      end
       @episode = Episode.new
       @statistic = Statistic.new
     end
 
     def create
-      name = episode_params[:name]
+      name = current_user.name
       script = episode_params[:script]
       image_io = episode_params[:image]
       if image_io != nil
@@ -28,7 +31,7 @@ class EpisodesController < ApplicationController
       end
       @statistic = Statistic.new({:good_num=>0, :bad_num=>0, :comment_num=>0})
       if @episode.save && @statistic.save
-        redirect_to @episode
+        redirect_to root_path
       else
          render "new"
       end
