@@ -8,7 +8,11 @@
         <li><%= link_to "Home",    '#' %></li>
         <li><%= link_to "About",    '#' %></li>
         <li><%= link_to "Contact",    '#' %></li>
-        <li><%= link_to "Sign in", '#' %></li>
+        <% if signed_in? %>
+          <li><%= link_to "Sign out", signout_path, method: "delete" %>
+        <% else %>
+          <li><%= link_to "Sign in", signin_path %></li>
+        <% end %>
       </ul>
     </div>
   </div>
