@@ -1,0 +1,2 @@
+<%=button_to  item.name, profiles_feeding_path(:name=>item.name, :id=>item.user_id), :remote=>true, :id=>item.user_id.to_s, :class=>'btn btn-primary btn-large'%>
+<%=button_to "Cancel", profiles_cancel_subscription_path(:id=>item.user_id), :remote=>true, :id=>(item.user_id.to_s + "-cancel"), :class=>'btn btn-primary btn-large'%>

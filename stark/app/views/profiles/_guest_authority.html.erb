@@ -1,0 +1,10 @@
+<%= form_for :whisper, :remote=>true, :url => url_for(:controller=>'profiles', :action=>'make_whisper', :name=>@accessed_profile_owner_name) do |f| %>
+    <div class="form-group">
+        <%=f.label :content, "whisper", style:"font-size:20px"%>
+        <%=f.text_area :content, placeholder: "Please edit your whisper...", maxLength: "140", id: "word-controlled-area", style: "width:300px;height:150px", maxlength: "140", id: "word-controlled-area" %>
+    </div>
+
+    <div style="float:right;padding-top:10px;padding-right:560px">
+        <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+    </div>
+<% end %>

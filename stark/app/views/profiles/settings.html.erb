@@ -1,0 +1,7 @@
+<div>
+	<%=button_to "Close History", profiles_toggle_history_path(:directive=>0), :remote=>true, :id=>'close-history', :disabled=>!@setting.history, :class=>"btn btn-primary btn-large"%>
+	<%=button_to "Open History", profiles_toggle_history_path(:directive=>1), :remote=>true, :id=>'open-history', :disabled=>@setting.history, :class=>"btn btn-primary btn-large"%>
+
+	<%=button_to "Close Whisper", profiles_toggle_whisper_path(:directive=>0), :remote=>true, :id=>'close-whisper', :disabled=>!@setting.whisper, :class=>"btn btn-primary btn-large"%>
+	<%=button_to "Open Whisper", profiles_toggle_whisper_path(:directive=>1), :remote=>true, :id=>'open-whisper', :disabled=>@setting.whisper, :class=>"btn btn-primary btn-large"%>
+</div>

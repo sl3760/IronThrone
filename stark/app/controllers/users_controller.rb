@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      Setting.new(:owner=>@user.id, :history=>true, :whisper=>true).save
       sign_in @user
       flash[:success] = "Welcome to Jokester!"
       redirect_to root_path

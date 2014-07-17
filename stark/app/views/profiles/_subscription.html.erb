@@ -1,0 +1,3 @@
+<% if @my_subscription_feeding_items.any? %>
+    <%= render :partial=>"shared/subscription_item", :collection=>@my_subscription_feeding_items, :as=>:item %>
+<% end %>

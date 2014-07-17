@@ -1,0 +1,10 @@
+<%= form_for :whisper, :remote=>true, :url => url_for({:controller=>"profiles", :action=>"make_reply", :name=>@name_of_user_to_reply_to}) do |f| %>
+    <div class="form-group">
+      <%=f.label :content, "reply", style:"font-size:20px"%>
+      <%=f.text_area :content, placeholder: "Please edit your reply...", maxLength: "140", id: "word-controlled-area", style: "width:300px;height:150px", maxlength: "140", id: "word-controlled-area"%>
+    </div>
+
+    <div style="float:right;padding-top:10px;padding-right:560px">
+      <%= f.submit "Send", class: "btn btn-large btn-primary" %>
+    </div>
+<% end %>

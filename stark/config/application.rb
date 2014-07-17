@@ -20,5 +20,11 @@ module Stark
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.assets.precompile += %w(*.png, *.jpg, *.jpeg, *.gif)
+
+    config.assets.precompile += %w( count_episode.js )
+
+    config.assets.precompile += %w( count_dash.js )
+
+    config.assets.precompile += %w( image_resize.js )
   end
 end

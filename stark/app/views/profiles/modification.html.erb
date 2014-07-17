@@ -1,0 +1,17 @@
+<div>
+	<%= form_for :user, :url=>url_for({:controller=>"profiles", :action=>"modify"}) do |f| %>
+	   <div>
+	     <%= f.label :name %>
+	     <%= f.text_field :name %>
+	   </div>
+
+       <div>
+	     <%= f.label :portrait %>
+         <%= f.file_field :portrait %>
+       </div>
+
+       <div>
+       	 <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+       </div>
+	<% end %>
+</div>

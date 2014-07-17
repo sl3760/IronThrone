@@ -1,0 +1,3 @@
+<% if @collections.any?  %>
+    <%= render :partial=>'shared/collection_item', :collection=>@collections, :as=>:collection %>
+<% end %>

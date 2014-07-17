@@ -79,4 +79,44 @@ Rails.application.routes.draw do
   match '/about', to: 'renders#about', via: 'get'
 
   match '/contact', to: 'renders#contact', via: 'get'
+
+  match '/profile', to: 'profiles#index', via: 'get'
+
+  match '/profiles/modification', to: 'profiles#modification', via: 'get'
+
+  match 'profiles/modify', to: 'profiles#modify', via: 'post'
+
+  match 'profiles/history', to: 'profiles#history', via: 'get'
+
+  match 'profiles/delete/history', to: 'profiles#delete_history', via: 'post'
+
+  match 'profiles/collection', to: 'profiles#collection', via: 'get'
+
+  match 'profiles/collect', to: 'profiles#collect', via: 'post'
+
+  match 'profiles/delete/collection', to: 'profiles#delete_collection', via: 'post'
+
+  match 'profiles/subscription', to: 'profiles#subscription', via: 'get'
+
+  match 'profiles/feeding', to: 'profiles#feeding', via: 'post'
+
+  match 'profiles/subscribe', to: 'profiles#subscribe', via: 'post'
+
+  match 'profiles/cancel/subscription', to: 'profiles#cancel_subscription', via: 'post'
+
+  match 'profiles/whisper', to: 'profiles#whisper', via: 'get'
+
+  match 'profiles/make/whisper', to: 'profiles#make_whisper', via: 'post'
+
+  match 'profiles/reply', to: 'profiles#reply', via: 'post'
+
+  match 'profiles/make/reply', to: 'profiles#make_reply', via: 'post'
+
+  match 'profiles/delete/whisper', to: 'profiles#delete_whisper', via: 'post'
+
+  match 'profiles/settings', to: 'profiles#settings', via: 'get'
+
+  match 'profiles/toggle/history', to: 'profiles#toggle_history', via: 'post'
+
+  match 'profiles/toggle/whisper', to: 'profiles#toggle_whisper', via: 'post'
 end

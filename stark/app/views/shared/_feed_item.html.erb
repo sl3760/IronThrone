@@ -1,18 +1,28 @@
-<div class="container container-control" id="<%= feed_item.id %>">
-    <div class="panel panel-default">
-            <div class="media-heading user-name">
-                <%= feed_item.name %>
+<div class="row" id="<%= feed_item.id %>">
+    <div class="col-md-12 episode-block">
+            <div class="row up-line">
+                <div class="col-md-6">
+                    <%= link_to improved_gravatar_for(feed_item), profile_path(:name=>feed_item.name) %>
+                    <%= link_to feed_item.name, profile_path(:name=>feed_item.name) %>
+                </div>
             </div>
         
-            <div class="media-body episode-script-content">
-                <%= feed_item.script %>
+            <div class="row">
+                <div class="col-md-12 member-distance">
+                  <%= feed_item.script %>
+                </div>
             </div>
     
-            <div class="media-body episode-image-content">
-                <%= image_tag feed_item.image_url %>
+            <% if feed_item.image_url != nil %>
+            <div class="row">
+                <div class="col-md-12 member-distance">
+                  <%= image_tag feed_item.image_url %>
+                </div>
             </div>
+            <% end %>
 
-            <div class="media-body episode-post-time">
+            <div class="row">
+              <div class="col-md-4 col-md-offset-8 member-distance">
                 <% 
                    tmp_time = feed_item.created_at
                    res = tmp_time.to_s.split()
@@ -20,25 +30,35 @@
                    created_at_time = res.join(" ")
                 %>
                 <%= created_at_time %>
+              </div>
             </div>
    
-            <div class="media-body">
-                <div style="float:left;padding-right:25px;padding-left:30px">
-<%= link_to (image_tag "/good.png"), url_for({:controller=>"renders", :action=>"estimate", :es=>"good", :id=>feed_item.id}), remote:true %>
-                    <!--<img src="/good.png" onClick="estimate(<%=feed_item.id %>, 'good')">-->
-                    <p style="padding-left:24px" id="<%= feed_item.id %>-good"><%= feed_item.good_num %></p>
+            <div class="row member-distance down-line">
+                <div class="col-md-2">
+                    <div class="fixed-row-height">
+                    <%= link_to (image_tag "/good.png", :class=>"estimate"), url_for({:controller=>"renders", :action=>"estimate", :es=>"good", :id=>feed_item.id}), remote:true %>
+                    </div>
+                    <p class="estimate-num" id="<%= feed_item.id %>-good"><%= feed_item.good_num %></p>
                 </div>
             
-                <div style="float:left;padding-top:2px;padding-right:27px">
-<%= link_to (image_tag "/bad.png"), url_for({:controller=>"renders", :action=>"estimate", :es=>"bad", :id=>feed_item.id}), remote:true %>
-                    <!--<img src="/bad.png" onClick="estimate(<%=feed_item.id %>, 'bad')">-->
-                    <p style="padding-left:24px" id="<%= feed_item.id %>-bad"><%= feed_item.bad_num %></p>
+                <div class="col-md-2">
+                    <div class="fixed-row-height">
+                    <%= link_to (image_tag "/bad.png", :class=>"estimate"), url_for({:controller=>"renders", :action=>"estimate", :es=>"bad", :id=>feed_item.id}), remote:true %>
+                    </div>
+                    <p class="estimate-num" id="<%= feed_item.id %>-bad"><%= feed_item.bad_num %></p>
                 </div>
                 
-                <div style="padding-top:23px">
+                <div class="col-md-4 comment-in-episode">
                     <%= feed_item.comment_num %>
                     <%=link_to "Comments", {:controller=>'renders', :action=>'dashboard', :episode_id=>feed_item.id} %>
+                </div>
+
+                <div class="col-md-4 collect-move-down">
+                    <div class="pull-right">
+                    <%= button_to "Collect", profiles_collect_path(:episode_id=>feed_item.id), :remote=>true, :id=>feed_item.id.to_s + '-' + 'collect', :disabled=>feed_item.collected, :class=>'btn btn-large btn-primary'%>
+                    </div>
                 </div>
             </div>
     </div>
 </div>
+<div class="row">&nbsp;</div>

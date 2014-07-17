@@ -1,0 +1,3 @@
+<% if @all_user_feedings.any?  %>
+    <%=render :partial=>'shared/feeding_item', :collection=>@all_user_feedings, :as=>:feed_item %>
+<% end %>

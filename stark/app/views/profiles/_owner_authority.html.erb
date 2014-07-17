@@ -1,0 +1,3 @@
+<% if @whisper_feeding_items.any? %>
+    <%= render :partial=>'shared/whisper_item', :collection=>@whisper_feeding_items, :as=>:whisper_item %>
+<% end %>

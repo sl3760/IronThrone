@@ -1,0 +1,7 @@
+<% if @flag == 0 %>
+   $("#screen").html("<%= escape_javascript(render 'guest_authority') %>");
+<% elsif @flag == 1 %>
+   $("#screen").html("<%= escape_javascript(render 'owner_authority') %>");
+<% else %>
+   $("#screen").html("Lack authority, please contact the owner")
+<% end %>

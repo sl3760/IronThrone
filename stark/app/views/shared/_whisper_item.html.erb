@@ -1,0 +1,30 @@
+<div class="container container-control" id="<%= whisper_item.id %>">
+	<div class="panel panel-default">
+      <div class="media-heading user-name">
+          <%= link_to improved_gravatar_for(whisper_item), profile_path(:name=>whisper_item.name) %>
+          <%= link_to whisper_item.name, profile_path(:name=>whisper_item.name) %>
+      </div>
+
+	  <div class="media-body episode-script-content">
+	    <%= whisper_item.content %>
+	  </div>
+
+	  <div class="media-body episode-post-time" style="padding-bottom:15px">
+         <% 
+           tmp_time = whisper_item.created_at
+           res = tmp_time.to_s.split()
+           res = res[0..(res.length-2)]
+           created_at_time = res.join(" ")
+         %>
+         <%= created_at_time %>
+      </div>
+    </div>
+</div>
+
+<div id = "<%=whisper_item.id %>-reply">
+  <%= button_to "Reply", profiles_reply_path(:name=>whisper_item.name), :remote=>true, :class=>"btn btn-large btn-primary" %>
+</div>
+
+<div id = "<%=whisper_item.id %>-delete">
+  <%= button_to "Delete", profiles_delete_whisper_path(:id=>whisper_item.id), :remote=>true, :class=>"btn btn-large btn-primary" %>
+</div>

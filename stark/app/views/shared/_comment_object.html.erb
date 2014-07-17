@@ -1,0 +1,63 @@
+<div class="col-md-10 col-md-offset-1 episode-block">
+  <div class="row up-line">
+    <div class="col-md-6">
+      <%= link_to improved_gravatar_for(@feed_item), profile_path(:name=>@feed_item.name) %>
+      <%= link_to @feed_item.name, profile_path(:name=>@feed_item.name) %>
+    </div>
+  </div>
+        
+  <div class="row">
+    <div class="col-md-12 member-distance">
+      <%= @feed_item.script %>
+    </div>
+  </div>
+    
+  <% if feed_item.image_url != nil %>
+  <div class="row">
+    <div class="col-md-12 member-distance">
+      <%= image_tag @feed_item.image_url %>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-4 col-md-offset-8 member-distance">
+    <div class="pull-right">
+    <% 
+        tmp_time = @feed_item.created_at
+        res = tmp_time.to_s.split()
+        res = res[0..(res.length-2)]
+        created_at_time = res.join(" ")
+    %>
+    <%= created_at_time %>
+    </div>
+    </div>
+  </div>
+   
+  <div class="row member-distance down-line">
+    <div class="col-md-1">
+      <div class="fixed-row-height">
+         <%= link_to (image_tag "/good.png", :class=>"estimate"), url_for({:controller=>"renders", :action=>"estimate", :es=>"good", :id=>@feed_item.id}), remote:true %>
+      </div>
+         <p class="estimate-num" id="<%= @feed_item.id %>-good"><%= @feed_item.good_num %></p>
+    </div>
+          
+    <div class="col-md-1">  
+      <div class="fixed-row-height">
+         <%= link_to (image_tag "/bad.png", :class=>"estimate"), url_for({:controller=>"renders", :action=>"estimate", :es=>"bad", :id=>@feed_item.id}), remote:true %>
+      </div>
+         <p class="estimate-num" id="<%= @feed_item.id %>-bad"><%= @feed_item.bad_num %></p>
+    </div>
+          
+    <div class="col-md-2 comment-in-episode">   
+         <%= @feed_item.comment_num %>
+         <%=link_to "Comments", {:controller=>'renders', :action=>'dashboard', :episode_id=>@feed_item.id} %>
+    </div>
+
+    <div class="col-md-4 col-md-offset-4 collect-move-down">
+      <div class="pull-right">
+         <%= button_to "Collect", profiles_collect_path(:episode_id=>@feed_item.id), :remote=>true, :id=>@feed_item.id.to_s + '-' + 'collect', :disabled=>@feed_item.collected, :class=>'btn btn-primary btn-large'%>
+      </div>
+    </div>
+  </div>
+</div>

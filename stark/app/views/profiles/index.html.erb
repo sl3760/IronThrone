@@ -1,0 +1,76 @@
+<div class="container">
+
+  <div class="row" id = "basic">
+     <div class="col-md-3">
+      <div class="row">
+        <div class="col-md-offset-1">
+  	     <% if @user.portrait == nil %>
+  	       <%= gravatar_for @user, :size=>100 %>
+  	     <% else %>
+           <%= image_tag @user.portrait, size: "100", alt: "Lack Portrait"%>
+  	     <% end %>
+        </div>
+      </div>
+
+      <div class="row profile-name-display">
+  	     <%= @user.name %>
+      </div>
+
+      <% if @flag == 2 %>
+      <div class="row profile-modify-display">
+         <%= button_to "Modify", profiles_modification_path, :method=>:get, :class=>"btn btn-primary btn-large" %>  
+      </div>
+      <% end %>
+     </div>
+  	
+     <div class="col-md-3 col-md-offset-6">
+       <% if @flag == 2 %>
+        <div class="row">
+         <div id="setting" class="pull-right profile-setting-display">
+            <%= button_to "Settings", profiles_settings_path, :class=>"btn btn-primary btn-large", :method=>:get %>
+         </div>
+        </div>
+       <% end %>
+
+       <% if !(@user.subscribed == -1) %>
+       <div class="row">   
+         <div id="subscribe" class="pull-right profile-subscribe-display">
+           <%=button_to "Subscribe", profiles_subscribe_path(:name=>@user.name), :remote=>true, :id=>"subscribe-button", :disabled=>(@user.subscribed==0), :class=>'btn btn-primary btn-large'%>
+         </div>   
+       </div>
+       <% end %>
+
+     </div>
+  </div>
+
+
+
+
+  <div class="row" id="bar" style="margin-top:22px;">
+      <ul class="nav nav-tabs" role="tablist">
+
+        <li style="font-size:120%">
+          <%= link_to "History", profiles_history_path(:name=>@user.name), :remote=>true %>
+        </li>
+
+        <li style="font-size:120%">
+          <%= link_to "Collection", profiles_collection_path, :remote=>true %>
+        </li>
+
+        <li style="font-size:120%">
+          <%= link_to "Subscription", profiles_subscription_path, :remote=>true %>
+        </li>
+
+        <li style="font-size:120%">
+          <%= link_to "Whisper", profiles_whisper_path(:name=>@user.name), :remote=>true %>
+        </li>
+
+      </ul>
+  </div>
+
+  <div class="row" style="margin-top:22px;">
+    <div id="screen" class="container" style="padding-top:30px">
+    </div>
+  </div>
+
+</div>

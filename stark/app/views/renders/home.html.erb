@@ -1,38 +1,16 @@
-<!--<script type="text/javascript">
-  function estimate() {
-    var id = arguments[0];
-    var es = arguments[1];
-    $.ajax({
-      type: "POST",
-      url: "/estimate",
-      data: {id:id, es:es},
-      datatype: "json",
-    
-      complete: function(XMLHttpRequest, textStatus) {
-        if(textStatus == "success") {
-          var es_id_selector = '#' + id + '-' + es;
-          $(es_id_selector).html($.parseJSON(XMLHttpRequest.responseText)['num']);
-        }else {
-          console.log(textStatus);
-        }
-      },
-
-      error: function(XMLHttpRequest, textStatus, errorThrown) {
-        console.log(textStatus + '&' + errorThrown);
-      }
-  });
-}
-</script>-->
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title  main-page-title">Jokester</h3>
-      <div style="text-align:right;padding-right:5px">
-         <%=link_to "Upload Your Episode", {:controller=>"episodes", :action=>"new"}%>
+<div class="container">
+  <div class="row">
+      <% 
+        len = @feed_items.length
+        mid = len / 2
+      %>
+      <div class="col-md-6 pull-left" style="width:49%">
+          <%=render :partial=>"shared/feed_item", :collection=>@feed_items[0..mid], :as=>:feed_item %>
       </div>
-    </div>
-    <div class="panel-body">
-        <div>
-            <%= render 'shared/feed' %>
-        </div>
-    </div>
+
+      <div class="col-md-6 pull-right" style="width:49%">
+          <%=render :partial=>"shared/feed_item", :collection=>@feed_items[mid+1..len-1], :as=>:feed_item %>
+      </div>
   </div>
+</div>
+<%=javascript_include_tag 'image_resize' %>

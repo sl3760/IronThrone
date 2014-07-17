@@ -1,0 +1,9 @@
+<% if @flag == 0 %>
+$('#close-history').attr('disabled', true)
+$('#open-history').attr('disabled', false)
+<% end %>
+
+<% if @flag == 1 %>
+$('#close-history').attr('disabled', false)
+$('#open-history').attr('disabled', true)
+<% end %>

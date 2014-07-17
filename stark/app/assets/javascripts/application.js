@@ -13,5 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require bootstrap
+
+function wordNumberController(maxLength, obj, selector) {
+	var left = maxLength - obj.value.length
+	if(left < 0) {
+		left = 0
+	}
+	$(selector).val(left)
+}
 

@@ -1,5 +1,5 @@
 <% if signed_in? %>
-    $('#comment-field').append("<%= escape_javascript(render 'comment') %>");
+    $('#comment-field').children().append("<%= escape_javascript(render :partial=>'shared/all_comment', :locals=>{:all_comment=>@comment}) %>");
 <% else %>
     window.location.href = "/signin";
 <% end %>

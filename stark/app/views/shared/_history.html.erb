@@ -1,0 +1,3 @@
+<% if @all_history_episodes.any? %>
+    <%= render :partial=>'shared/history_item', :collection=>@all_history_episodes, :as=>:all_history_episode %>
+<% end %>

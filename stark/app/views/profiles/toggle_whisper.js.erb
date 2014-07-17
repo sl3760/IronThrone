@@ -1,0 +1,9 @@
+<% if @flag == 0 %>
+$('#close-whisper').attr('disabled', true)
+$('#open-whisper').attr('disabled', false)
+<% end %>
+
+<% if @flag == 1 %>
+$('#close-whisper').attr('disabled', false)
+$('#open-whisper').attr('disabled', true)
+<% end %>

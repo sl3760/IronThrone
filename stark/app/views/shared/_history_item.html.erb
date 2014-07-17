@@ -1,0 +1,44 @@
+<div class="container container-control" id="<%= all_history_episode.id %>">
+    <div class="panel panel-default">        
+            <div class="media-body episode-script-content" style="padding-top:15px">
+                <%= all_history_episode.script %>
+            </div>
+    
+            <div class="media-body episode-image-content">
+                <%= image_tag all_history_episode.image_url %>
+            </div>
+
+            <div class="media-body episode-post-time">
+                <% 
+                   tmp_time = all_history_episode.created_at
+                   res = tmp_time.to_s.split()
+                   res = res[0..(res.length-2)]
+                   created_at_time = res.join(" ")
+                %>
+                <%= created_at_time %>
+            </div>
+   
+            <div class="media-body">
+                <div style="float:left;padding-right:25px;padding-left:30px">
+<%= link_to (image_tag "/good.png"), url_for({:controller=>"renders", :action=>"estimate", :es=>"good", :id=>all_history_episode.id}), remote:true %>
+                    <p style="padding-left:24px" id="<%= all_history_episode.id %>-good"><%= all_history_episode.good_num %></p>
+                </div>
+            
+                <div style="float:left;padding-top:2px;padding-right:27px">
+<%= link_to (image_tag "/bad.png"), url_for({:controller=>"renders", :action=>"estimate", :es=>"bad", :id=>all_history_episode.id}), remote:true %>
+                    <p style="padding-left:24px" id="<%= all_history_episode.id %>-bad"><%= all_history_episode.bad_num %></p>
+                </div>
+                
+                <div style="padding-top:23px">
+                    <%= all_history_episode.comment_num %>
+                    <%=link_to "Comments", {:controller=>'renders', :action=>'dashboard', :episode_id=>all_history_episode.id} %>
+                </div>
+            </div>
+    </div>
+</div>
+
+<% if all_history_episode.authority == 1 %>
+  <div id="<%=all_history_episode.id%>-delete" style="padding-top:218px">
+    <%=button_to "Delete", profiles_delete_history_path(:name=>all_history_episode.name, :id=>all_history_episode.id), :class=>'btn btn-large btn-primary', :remote=>true %>
+  </div>
+<% end %>

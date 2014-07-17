@@ -1,0 +1,5 @@
+<% if @authority != -1 %>
+$("#screen").html("<%= escape_javascript(render 'history') %>")
+<% else %>
+$("#screen").html("Lack authority, please contact the owner")
+<% end %>

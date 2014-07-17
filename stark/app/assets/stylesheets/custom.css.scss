@@ -1,17 +1,129 @@
 $panel-inner-border:#FF0000;
 $panel-primary-text:#000000;
 $navbar-inverse-bg:#000000;
+$grid-columns: 12;
 
 @import "bootstrap";
 
+body {
+  background-color: #FFCCCC;
+}
+
+.episode-block {
+  background-color: #FFFFFF;
+}
+
+.up-line {
+  padding-top: 20px;
+}
+
+.down-line {
+  padding-bottom: 20px;
+}
+
+.member-distance {
+  padding-top: 20px;
+}
+
+.comment-in-episode {
+  padding-top: 10px;  
+}
+
+.container-to-top {
+  padding-top: 90px;
+}
+
+.fixed-row-height {
+  height: 40px;
+}
+
+.estimate-num {
+  padding-left: 10px;
+}
+
+.collect-move-down {
+  padding-top: 15px;
+}
+
+.episode-upload-box {
+  width:600px;
+  height:300px;
+  margin-bottom: 7px;
+}
+
+.comment-upload-box {
+  width:600px;
+  height:300px;
+  margin-bottom: 20px;
+}
+
+.word-num-control-box {
+  width: 50px;
+  height: 30px;
+  text-align: center;
+}
+
+.choose-button-position {
+  padding-left: 30px;
+}
+
+.label-name-position {
+  padding-left: 30px;
+}
+
+.upload-button-position {
+  padding-bottom: 50px;
+}
+
+.spacing-between-episode-comment {
+  margin-top:20px;
+}
+
+.remove-li-dot {
+  list-style: none;
+}
+
+.comment-label-size {
+  font-size:130%;
+}
+
+.comment-box-left-spacing {
+  padding-left:0px;
+}
+
+.widget-top-spacing {
+  padding-top:270px;
+}
+
+.profile-setting-display {
+  padding-right:30px;
+}
+
+.profile-subscribe-display {
+  padding-right:30px;
+  margin-top:15px;
+}
+
+.profile-name-display {
+  padding-left:50px;
+  margin-top:15px;
+  font-size:150%;
+  font-weight:bold;
+}
+
+.profile-modify-display {
+  padding-left:35px;
+  margin-top:15px;
+}
+
 .main-page-title {
-    text-align:center;
-    padding-bottom:15px;
-    padding-top:15px;
-    font-weight:bold;
-    font-size:40px;
-    font-style:normal;
-    font-family:"Times New Roman", Georgia, Serif;
+  text-align:center;
+  padding-bottom:15px;
+  padding-top:15px;
+  font-weight:bold;
+  font-size:40px;
+  font-style:normal;
+  font-family:"Times New Roman", Georgia, Serif;
 }
 
 .container-control {
@@ -53,3 +165,29 @@ $navbar-inverse-bg:#000000;
 	text-align: right;
 	padding-right: 30px; 
 }
+
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+
+html, body {
+  height: 100%;
+}
+
+#wrap {
+  min-height: 100%;
+}
+
+#main {
+  overflow:auto;
+  padding-bottom:150px; /* this needs to be bigger than footer height*/
+}
+
+.footer {
+  position: relative;
+  margin-top: -150px; /* negative value of footer height */
+  height: 150px;
+  clear:both;
+  padding-top:20px;
+} 
