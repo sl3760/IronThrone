@@ -1,7 +1,6 @@
 class EpisodesController < ApplicationController
     def show
       @episode = Episode.find(params[:id])
-      @statistic = Statistic.find(params[:id])
     end
  
     def new
@@ -9,7 +8,6 @@ class EpisodesController < ApplicationController
         redirect_to signin_path
       end
       @episode = Episode.new
-      @statistic = Statistic.new
     end
 
     def create
@@ -23,14 +21,13 @@ class EpisodesController < ApplicationController
         File.open(image_url, 'wb') do |file|
            file.write(image_io.read)
         end
-        new_params = {:name=>name, :script=>script, :image_url=>image_name}
+        new_params = {:name=>name, :script=>script, :image_url=>image_name, :good_num=>0, :bad_num=>0, :comment_num=>0}
         @episode = Episode.new(new_params)
       else
-        new_params = {:name=>name, :script=>script, :image_url=>nil}
+        new_params = {:name=>name, :script=>script, :image_url=>nil, :good_num=>0, :bad_num=>0, :comment_num=>0}
         @episode = Episode.new(new_params)
       end
-      @statistic = Statistic.new({:good_num=>0, :bad_num=>0, :comment_num=>0})
-      if @episode.save && @statistic.save
+      if @episode.save
         redirect_to root_path
       else
          render "new"

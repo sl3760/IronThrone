@@ -17,10 +17,8 @@ class RendersController < ApplicationController
    end 
 
    def home
-      @episode_feed_items = Episode.all
-      @statistic_feed_items = Statistic.all
+      @episode_feed_items = Episode.paginate(:page => params[:page], :per_page => 2);
       @feed_items = []
-      tmp = 0
       user = current_user
       @episode_feed_items.each do |item|
         collected = false
@@ -36,12 +34,74 @@ class RendersController < ApplicationController
         end
         user = User.find_by_name(item.name)
         infoFeed = InfoFeed.new(user.email, user.portrait, item.id, item.name, item.script, 
-             item.image_url, item.created_at, @statistic_feed_items[tmp].good_num,
-             @statistic_feed_items[tmp].bad_num, @statistic_feed_items[tmp].comment_num, collected)
+             item.image_url, item.created_at, item.good_num,
+             item.bad_num, item.comment_num, collected)
         @feed_items.push(infoFeed)
-        tmp = tmp + 1
       end
     end
+
+    def sort
+    if params[:sort]=="hot"
+      @episode_feed_items = Episode.order("good_num DESC, bad_num ASC, comment_num DESC").paginate(:page => params[:page], :per_page => 2)
+      @feed_items = []
+      @episode_feed_items.each do |item|
+        user = User.find_by_name(item.name);
+        collected = false;
+        len = Collection.where(:user_id=>user.id, :episode_id=>item.id)
+        if len.length > 0
+          collected = true
+        else
+          collected = false
+        end 
+        infoFeed = InfoFeed.new(user.email, user.portrait,item.id, item.name, item.script, 
+        item.image_url, item.created_at, item.good_num,
+        item.bad_num, item.comment_num, collected)
+        @feed_items.push(infoFeed)
+      end
+      respond_to do |format|
+        format.html
+        format.js
+      end 
+    elsif params[:sort]=="last"
+      @episode_feed_items = Episode.paginate(:page => params[:page], :per_page => 2)
+      @feed_items = []
+      @episode_feed_items.each do |item|
+        user = User.find_by_name(item.name);
+        collected = false;
+        len = Collection.where(:user_id=>user.id, :episode_id=>item.id)
+        if len.length > 0
+          collected = true
+        else
+          collected = false
+        end 
+        infoFeed = InfoFeed.new(user.email, user.portrait,item.id, item.name, item.script, 
+        item.image_url, item.created_at, item.good_num,
+        item.bad_num, item.comment_num, collected)
+        @feed_items.push(infoFeed)
+      end
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @episode_feed_items = Episode.paginate(:page => params[:page], :per_page => 2)
+      @feed_items = []
+      @episode_feed_items.each do |item|
+        user = User.find_by_name(item.name);
+        collected = false;
+        len = Collection.where(:user_id=>user.id, :episode_id=>item.id)
+        if len.length > 0
+          collected = true
+        else
+          collected = false
+        end 
+        infoFeed = InfoFeed.new(user.email, user.portrait, item.id, item.name, item.script, 
+        item.image_url, item.created_at, item.good_num,
+        item.bad_num, item.comment_num, collected)
+        @feed_items.push(infoFeed)
+      end
+    end
+  end
    
   def estimate
     @id = params[:id]
@@ -53,15 +113,15 @@ class RendersController < ApplicationController
     elsif hasMadeEstimate?(@id.to_i, current_user.id)
       @flag = 1
     else
-      statistic = Statistic.find(@id.to_i)
+      episode = Episode.find(@id.to_i)
       if @es == "good"
-        statistic.good_num = statistic.good_num + 1
-        @num = statistic.good_num
+        episode.good_num = episode.good_num + 1
+        @num = episode.good_num
       else
-        statistic.bad_num = statistic.bad_num + 1
-        @num = statistic.bad_num
+        episode.bad_num = episode.bad_num + 1
+        @num = episode.bad_num
       end
-      statistic.save
+      episode.save
       Estimate.new(:episode_id=>@id.to_i, :user_id=>current_user.id).save
     end
     respond_to do |format|
@@ -92,7 +152,6 @@ class RendersController < ApplicationController
   def dashboard
     @episode_id = params[:episode_id]
     episode = Episode.find(@episode_id)
-    statistic = Statistic.find(@episode_id)
     collected = false
     user = current_user
     if signed_in?
@@ -107,8 +166,8 @@ class RendersController < ApplicationController
     end
     episode_owner = User.find_by_name(episode.name)
     @feed_item = InfoFeed.new(episode_owner.email, episode_owner.portrait, @episode_id, episode.name, episode.script,
-        episode.image_url, episode.created_at, statistic.good_num,
-        statistic.bad_num, statistic.comment_num, collected)
+        episode.image_url, episode.created_at, episode.good_num,
+        episode.bad_num, episode.comment_num, collected)
     @all_comments = []
     Comment.all.each do |com|
       if "#{com.episode_id}" == @episode_id
@@ -135,9 +194,9 @@ class RendersController < ApplicationController
     comment_ = Comment.new({:episode_id=>episode_id, :name=>name ,:content=>content})
     tmp1 = comment_.save
     @comment = CommentFeed.new(comment_.id, episode_id, name, content, comment_.created_at, user_.email, user_.portrait)
-    @stat = Statistic.find(episode_id)
-    @stat.comment_num = @stat.comment_num + 1
-    tmp2 = @stat.save
+    @episode = Episode.find(episode_id)
+    @episode.comment_num = @episode.comment_num + 1
+    tmp2 = @episode.save
     respond_to do |format|
       if tmp1 && tmp2
         format.html {render :action=>"dashboard"}

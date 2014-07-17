@@ -6,11 +6,12 @@
         <div>
           <%=button_to "Last", renders_sort_path(:sort => "last"),  :remote=>true, :method=>'get', :class =>"btn btn-danger" %>
         </div>
-      <div class="feeds col-md-12" style="width:80%">
+      <div class="col-md-12" style="width:80%">
           <%=render :partial=>"shared/feed_item", :collection=>@feed_items, :as=>:feed_item %>
-         <div>
-           <%= will_paginate @episode_feed_items, renderer: BootstrapPagination::Rails%>
-         </div>
+      </div>
+
+      <div>
+          <%= will_paginate @episode_feed_items, renderer: BootstrapPagination::Rails%>
       </div>
   </div>
 </div>

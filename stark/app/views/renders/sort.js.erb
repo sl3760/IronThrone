@@ -1,0 +1,26 @@
+$('.feeds').html("");
+$('.feeds').append("<div><%= escape_javascript(render :partial=>'shared/feed_item', :collection=>@feed_items, :as=>:feed_item) %></div>");
+$('.feeds').append("<div><%=escape_javascript(will_paginate @episode_feed_items, renderer: BootstrapPagination::Rails) %></div>");
+	(function() {
+		$(".estimate").each(function() {
+			var $img = $(this);
+			$img.css({
+				width:$img.width() / 2,
+				height:$img.height() / 2
+			});
+		});
+
+		$(".estimate").hover(function() {
+			var $img = $(this);
+			$img.css({
+				width:$img.width()*1.2,
+				height:$img.height()*1.2,
+			});
+		}, function() {
+			var $img = $(this);
+			$img.css({
+				width:$img.width() / 1.2,
+				height:$img.height() / 1.2,
+			});
+		});
+	})();

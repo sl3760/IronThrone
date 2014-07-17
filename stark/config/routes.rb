@@ -119,4 +119,6 @@ Rails.application.routes.draw do
   match 'profiles/toggle/history', to: 'profiles#toggle_history', via: 'post'
 
   match 'profiles/toggle/whisper', to: 'profiles#toggle_whisper', via: 'post'
+
+  match "/renders/sort", to: "renders#sort", via: 'get'
 end
