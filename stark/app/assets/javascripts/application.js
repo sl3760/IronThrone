@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require isotope.pkgd.min.js
 
 function wordNumberController(maxLength, obj, selector) {
 	var left = maxLength - obj.value.length
@@ -22,4 +23,11 @@ function wordNumberController(maxLength, obj, selector) {
 	}
 	$(selector).val(left)
 }
+
+$(function() {
+	$("#container").isotope({
+		itemSelector: ".item",
+		layoutMode: "fitRows"
+	});
+})
 
