@@ -1,17 +1,33 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-      <div>
-          <%=button_to "Hot", renders_sort_path(:sort => "hot"),  :remote=>true, :method=>'get', :class =>"btn btn-danger" %>
+      <div class="feeds col-md-12">
+       <%
+          lens = @feed_items.length
+          half = lens / 2
+       %>
+      <div class="row">
+         <div id="sorts" class="button-group">
+           <button class="button is-checked" data-sort-value="original-order">original order</button>
+           <button class="button" data-sort-value="oldest" data-sort-order="Ascending">oldest</button>
+           <button class="button" data-sort-value="newest" data-sort-order="Descending">newest</button>
+           <button class="button" data-sort-value="hottest" data-sort-order="Descending">hottest</button>
+           <button class="button" data-sort-value="coldest" data-sort-order="Descending">coldest</button>
+           <button class="button" data-sort-value="comment-number" data-sort-order="Descending">comment number</button>
         </div>
-        <div>
-          <%=button_to "Last", renders_sort_path(:sort => "last"),  :remote=>true, :method=>'get', :class =>"btn btn-danger" %>
+      </div>
+      <div class="row">&nbsp;</div>
+      <div class="row">
+      	<div class="col-md-12">
+           <div id="episode-container">
+              <%=render :partial=>"shared/feed_item", :collection=>@feed_items, :as=>:feed_item %>
+           </div>
         </div>
-      <div class="feeds col-md-12" style="width:80%">
-          <%=render :partial=>"shared/feed_item", :collection=>@feed_items, :as=>:feed_item %>
-         <div>
-           <%= will_paginate @episode_feed_items, renderer: BootstrapPagination::Rails%>
-         </div>
+      </div>
+        <div class="row">
+        <%= will_paginate @episode_feed_items, renderer: BootstrapPagination::Rails%>
+        </div>
       </div>
   </div>
 </div>
 <%=javascript_include_tag 'image_resize' %>
+<%=javascript_include_tag 'isotope_bind' %>

@@ -26,5 +26,7 @@ module Stark
     config.assets.precompile += %w( count_dash.js )
 
     config.assets.precompile += %w( image_resize.js )
+
+    config.assets.precompile += %w( isotope_bind.js )
   end
 end

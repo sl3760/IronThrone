@@ -1,6 +1,18 @@
 module SessionsHelper
   def sign_in(user)
     remember_token = User.new_remember_token
+    puts "1111111111111111111111111111111"
+    puts "1111111111111111111111111111111"
+    puts "1111111111111111111111111111111"
+    puts "1111111111111111111111111111111"
+    puts "1111111111111111111111111111111"
+    puts "1111111111111111111111111111111"
+    puts remember_token
+    puts "1111111111111111111111111111111"
+    puts "1111111111111111111111111111111"
+    puts "1111111111111111111111111111111"
+    puts "1111111111111111111111111111111"
+    puts "1111111111111111111111111111111"
     cookies.permanent[:remember_token] = remember_token
     user.update_attribute(:remember_token, User.digest(remember_token))
     self.current_user = user
@@ -17,6 +29,8 @@ module SessionsHelper
   def current_user
     remember_token = User.digest(cookies[:remember_token])
     @current_user ||= User.find_by(remember_token: remember_token)
+    puts "-------------------------------------------------------------------------------------------------------------------------------------------------"
+    return @current_user
   end
 
   def sign_out

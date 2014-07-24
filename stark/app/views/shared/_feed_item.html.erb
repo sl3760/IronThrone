@@ -1,4 +1,4 @@
-<div class="item row" id="<%= feed_item.id %>">
+<div class="episode-item row-fluid" id="<%= feed_item.id %>">
     <div class="col-md-12 episode-block">
             <div class="row up-line">
                 <div class="col-md-6">
@@ -16,13 +16,13 @@
             <% if feed_item.image_url != nil %>
             <div class="row">
                 <div class="col-md-12 member-distance">
-                  <%= image_tag feed_item.image_url %>
+                  <%= image_tag feed_item.image_url, :class=>"display-image", :style=>"width:370px;"%>
                 </div>
             </div>
             <% end %>
 
             <div class="row">
-              <div class="col-md-4 col-md-offset-8 member-distance">
+              <div class="col-md-4 col-md-offset-8 member-distance time">
                 <% 
                    tmp_time = feed_item.created_at
                    res = tmp_time.to_s.split()
@@ -38,18 +38,18 @@
                     <div class="fixed-row-height">
                     <%= link_to (image_tag "/good.png", :class=>"estimate"), url_for({:controller=>"renders", :action=>"estimate", :es=>"good", :id=>feed_item.id}), remote:true %>
                     </div>
-                    <p class="estimate-num" id="<%= feed_item.id %>-good"><%= feed_item.good_num %></p>
+                    <p class="estimate-num hottest" id="<%= feed_item.id %>-good"><%= feed_item.good_num %></p>
                 </div>
             
                 <div class="col-md-2">
                     <div class="fixed-row-height">
                     <%= link_to (image_tag "/bad.png", :class=>"estimate"), url_for({:controller=>"renders", :action=>"estimate", :es=>"bad", :id=>feed_item.id}), remote:true %>
                     </div>
-                    <p class="estimate-num" id="<%= feed_item.id %>-bad"><%= feed_item.bad_num %></p>
+                    <p class="estimate-num coldest" id="<%= feed_item.id %>-bad"><%= feed_item.bad_num %></p>
                 </div>
                 
                 <div class="col-md-4 comment-in-episode">
-                    <%= feed_item.comment_num %>
+                    <span class="comment-number"><%= feed_item.comment_num %></span>
                     <%=link_to "Comments", {:controller=>'renders', :action=>'dashboard', :episode_id=>feed_item.id} %>
                 </div>
 

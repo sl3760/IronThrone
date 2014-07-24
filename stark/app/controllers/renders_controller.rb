@@ -17,7 +17,7 @@ class RendersController < ApplicationController
    end 
 
    def home
-      @episode_feed_items = Episode.paginate(:page => params[:page], :per_page => 2);
+      @episode_feed_items = Episode.paginate(:page => params[:page], :per_page => 30);
       @feed_items = []
       user = current_user
       @episode_feed_items.each do |item|

@@ -24,10 +24,6 @@ function wordNumberController(maxLength, obj, selector) {
 	$(selector).val(left)
 }
 
-$(function() {
-	$("#container").isotope({
-		itemSelector: ".item",
-		layoutMode: "fitRows"
-	});
-})
 
+$(function() {
+});
