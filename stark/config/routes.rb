@@ -74,6 +74,10 @@ Rails.application.routes.draw do
 
   match '/signin', to: 'sessions#new', via:'get'
 
+  match '/auth/:provider/callback', :to => 'sessions#facebook_create', via: 'get'
+
+  match 'auth/failure', to: redirect('/'), via: 'get'
+
   match '/signout', to: 'sessions#destroy', via: 'delete'
 
   match '/about', to: 'renders#about', via: 'get'
